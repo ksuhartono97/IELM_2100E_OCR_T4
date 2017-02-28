@@ -1,1 +1,1 @@
-# IELM_2100E_OCR_T4
+# IELM 2100E OCR Project - Group 4
