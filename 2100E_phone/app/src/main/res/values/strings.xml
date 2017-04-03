@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">IELM2100E OCR Phone App</string>
+    <string name="cam_button_name">Open Camera</string>
+    <string name="album_name">CameraSample</string>
+</resources>
