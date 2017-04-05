@@ -1,19 +1,24 @@
 package com.ksuhartono.a2100e_phone;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +29,7 @@ import java.util.Date;
 public class MainActivity extends Activity {
 
     private static final int CAMERA_REQUEST = 1888;
+    private static final int REQUEST_WRITE_STORAGE = 112;
     private ImageView imageView;
     private String mCurrentPhotoPath;
     private Bitmap mImageBitmap;
@@ -35,6 +41,7 @@ public class MainActivity extends Activity {
 
     private static final String BITMAP_STORAGE_KEY = "viewbitmap";
     private static final String IMAGEVIEW_VISIBILITY_STORAGE_KEY = "imageviewvisibility";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +103,6 @@ public class MainActivity extends Activity {
         return storageDir;
     }
 
-
     private void setPic() {
 
 		/* There isn't enough memory to open up more than a couple camera photos */
@@ -140,15 +146,9 @@ public class MainActivity extends Activity {
         String imageFileName = JPEG_FILE_PREFIX + timeStamp + "_";
         File albumF = getAlbumDir();
         File imageF = File.createTempFile(imageFileName, JPEG_FILE_SUFFIX, albumF);
+
+        mCurrentPhotoPath = imageF.getAbsolutePath();
         return imageF;
-    }
-
-    private File setUpPhotoFile() throws IOException {
-
-        File f = createImageFile();
-        mCurrentPhotoPath = f.getAbsolutePath();
-
-        return f;
     }
 
     private void galleryAddPic() {
@@ -159,21 +159,40 @@ public class MainActivity extends Activity {
         this.sendBroadcast(mediaScanIntent);
     }
 
+    static final int REQUEST_TAKE_PHOTO = 1;
 
     public void openCamera (View view) {
+        boolean hasPermission = (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+        if (!hasPermission) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_WRITE_STORAGE);
+        }
+        else {
+            makeCameraIntent();
+        }
+
+    }
+
+    public void makeCameraIntent() {
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
         File f = null;
 
         try {
-            f = setUpPhotoFile();
-            mCurrentPhotoPath = f.getAbsolutePath();
-            Log.d("photopath", mCurrentPhotoPath);
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+            f = createImageFile();
         } catch (IOException e) {
             e.printStackTrace();
             f = null;
             mCurrentPhotoPath = null;
+        }
+
+        if (f!=null) {
+            Uri photoURI = FileProvider.getUriForFile(this,
+                    "com.ksuhartono.a2100e_phone.fileprovider", f);
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
         }
 
         startActivityForResult(cameraIntent, CAMERA_REQUEST);
@@ -191,5 +210,23 @@ public class MainActivity extends Activity {
             galleryAddPic();
             mCurrentPhotoPath = null;
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode)
+        {
+            case REQUEST_WRITE_STORAGE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+                    makeCameraIntent();
+                } else
+                {
+                    Toast.makeText(this, "The app was not allowed to write to your storage. Hence, it cannot function properly. Please consider granting it this permission", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
     }
 }

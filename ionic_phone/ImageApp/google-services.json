@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "109715088531",
+    "firebase_url": "https://ielmocrdatabase.firebaseio.com",
+    "project_id": "ielmocrdatabase",
+    "storage_bucket": "ielmocrdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109715088531:android:0bbef78b9ccf01ef",
+        "android_client_info": {
+          "package_name": "com.ielmOCRT4.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109715088531-0o6uf4uh75srtcpcg02bsikjud9m2b6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR3r3MWKNHchLTqwts_lIqnCKWaEJ2Guw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
