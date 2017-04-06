@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.imageapp826959" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>ImageApp</name>
+<widget id="com.ksuhartono.phoneielmt4ocr" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Team4 OCR App</name>
   <description>
-        An Ionic Framework and Cordova project.
+        An Ionic Framework and Cordova project. Built as an additional tool for the OCR for IELM course project.
     </description>
-  <author email="you@example.com" href="http://example.com/">
+  <author email="ksuhartono@connect.ust.hk" href="ksuhartono@connect.ust.hk">
       Kristian Suhartono
     </author>
   <content src="index.html"/>
