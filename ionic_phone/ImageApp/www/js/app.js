@@ -22,6 +22,8 @@ var fbAuth = firebase.auth();
 
 var imageApp = angular.module("starter", ["ionic", "ngCordova", "firebase"]);
 
+var userData = null;
+
 
 imageApp.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -100,21 +102,20 @@ imageApp.controller("SecureController", function($scope, $ionicHistory, $firebas
 
   $scope.myVar = 1;
 
-  // if($scope.user) {
-  //   var userReference = fb.child("users/" + fbAuth.uid);
-  //   var syncArray = $firebaseArray(userReference.child("images"));
-  //   $scope.images = syncArray;
-  // } else {
-  //   $state.go("firebase");
-  // }
-  // var authorization = fbAuth.currentUser;
-  // if(authorization) {
-  //   // var userReference = fb.child("users/" + authorization.uid);
-  //   var syncArray = $firebaseArray(fb.child('images'));
-  //   $scope.images = syncArray;
-  // } else {
-  //   $state.go("firebase");
-  // }
+  var syncArray = null;
+
+  var usersRef = firebase.database().ref('users');
+  var uidRef = usersRef.child(fbAuth.currentUser.uid);
+  var imagesRef = uidRef.child('images');
+  console.log(imagesRef.toString());
+
+  var syncArray = $firebaseArray(fb);
+  syncArray.$loaded().then(function(x) {
+    console.log("Success");
+  }).catch(function(error) {
+    console.error("Error:", error);
+  });
+  $scope.images = syncArray;
 
   $scope.upload = function() {
     var options = {
@@ -126,7 +127,7 @@ imageApp.controller("SecureController", function($scope, $ionicHistory, $firebas
       popoverOptions: CameraPopoverOptions,
       targetWidth: 500,
       targetHeight: 500,
-      saveToPhotoAlbum: true
+      saveToPhotoAlbum: false
     };
     $cordovaCamera.getPicture(options).then(function(imageData) {
       syncArray.$add({image: imageData}).then(function() {
