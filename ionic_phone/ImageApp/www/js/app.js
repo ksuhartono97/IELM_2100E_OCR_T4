@@ -1,12 +1,11 @@
-// Ionic Starter App
+// Kristian Suhartono
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-// var fb = new Firebase("https://ielmocrdatabase.firebaseio.com/");
-// Initialize Firebase
+
 var config = {
   apiKey: "AIzaSyD-beQYtXL5ns5029cYcBcKi423xucOkCA",
   authDomain: "ielmocrdatabase.firebaseapp.com",
@@ -57,21 +56,14 @@ imageApp.config(function($stateProvider, $urlRouterProvider) {
 imageApp.controller("FirebaseController", function($scope, $state, $firebaseAuth) {
 
   $scope.login = function(username, password) {
-    // fbAuth.$authWithPassword({
-    //   email: username,
-    //   password: password
-    // }).then(function(authData) {
-    //   $state.go("secure");
-    // }).catch(function(error) {
-    //   console.error("ERROR: " + error);
-    // });
     fbAuth.signInWithEmailAndPassword(username, password).then(function(result) {
-      // console.log("Signed in as:", result.user.uid);
+      alert("Login succesful");
       $state.go("secure")
     }).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
+      alert("User login failed, reason: " + errorMessage);
       console.error("ERROR: " + errorCode + " | Message: " + errorMessage);
     });
   };
@@ -80,10 +72,11 @@ imageApp.controller("FirebaseController", function($scope, $state, $firebaseAuth
 
   $scope.register = function(username, password) {
     fbAuth.createUserWithEmailAndPassword(username, password).then(function(result) {
-      // console.log("Signed in as:", result.user.uid);
+      alert("User creation successful");
       $state.go("secure")
     }).catch(function(error) {
       // Handle Errors here.
+      alert("User creation failed");
       var errorCode = error.code;
       var errorMessage = error.message;
       console.error("ERROR: " + errorCode + " | Message: " + errorMessage);
@@ -102,14 +95,9 @@ imageApp.controller("SecureController", function($scope, $ionicHistory, $firebas
 
   $scope.myVar = 1;
 
-  var syncArray = null;
+  var imagesRef = firebase.database().ref('images');
 
-  var usersRef = firebase.database().ref('users');
-  var uidRef = usersRef.child(fbAuth.currentUser.uid);
-  var imagesRef = uidRef.child('images');
-  console.log(imagesRef.toString());
-
-  var syncArray = $firebaseArray(fb);
+  var syncArray = $firebaseArray(imagesRef);
   syncArray.$loaded().then(function(x) {
     console.log("Success");
   }).catch(function(error) {
