@@ -1,25 +1,58 @@
 <head>
-  <title>ocrwebserver</title>
+  <title>IELM Team 4 Web Server</title>
 </head>
 
-<body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
-</body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="mainLayout">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                {{>Template.dynamic template=mainContent}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <footer class="footer">
+                    <div class="container" align="center">
+                        <p class="text-muted">2017 Kristian Suhartono for IELM 2100E</p>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="home">
+    <div class="homePage">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.indigo-pink.min.css">
+        <div class="row">
+            <div class = "col-sm-12">
+                <h1 align = "center">OCR WebServer Log Manager</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-hover table-condesed">
+                    <thead>
+                    <tr>
+                        <th>Image Name</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each imageTimestamps}}
+                        <tr>
+                            <td>{{timestamp}}.jpg</td>
+                            <td>Downloaded</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
 </template>
