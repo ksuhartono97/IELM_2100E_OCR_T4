@@ -110,12 +110,10 @@ imageApp.controller("SecureController", function($scope, $ionicHistory, $firebas
       quality : 75,
       destinationType : Camera.DestinationType.DATA_URL,
       sourceType : Camera.PictureSourceType.CAMERA,
-      allowEdit : true,
+      allowEdit : false,
       encodingType: Camera.EncodingType.JPEG,
       popoverOptions: CameraPopoverOptions,
-      targetWidth: 500,
-      targetHeight: 500,
-      saveToPhotoAlbum: false
+      saveToPhotoAlbum: true
     };
     $cordovaCamera.getPicture(options).then(function(imageData) {
       syncArray.$add({image: imageData}).then(function() {
