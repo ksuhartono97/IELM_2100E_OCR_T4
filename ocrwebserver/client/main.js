@@ -1,5 +1,7 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import {Session} from 'meteor/session'
+// import {Papa} from 'meteor/harrison/papa-parse'
 
 import './main.html';
 
@@ -18,11 +20,21 @@ var fbAuth = firebase.auth();
 var fbDatabase = firebase.database().ref();
 var fbImages = fbDatabase.child('images');
 
-Template.home.onCreated(() => {
-    Meteor.subscribe("imageTimestamps.all");
+var currentContext = new ReactiveVar();
+
+Tracker.autorun(function() {
+    FlowRouter.watchPathChange();
+    Session.set('currentContext',FlowRouter.current().path);
+    // do anything with the current context
+    // or anything you wish
 });
 
-Template.home.onRendered(() => {
+Template.mainLayout.onCreated(() => {
+    Meteor.subscribe("imageTimestamps.all");
+    Meteor.subscribe("skudata.all");
+});
+
+Template.mainLayout.onRendered(() => {
     fbImages.on('child_added', function(snapshot) {
         let image = new Image();
         image.src = 'data:image/jpg;base64,' + snapshot.val().image;
@@ -40,8 +52,68 @@ Template.home.onRendered(() => {
     });
 });
 
+Template.mainLayout.events({
+    "click #upload": () => {
+        FlowRouter.go("/upload");
+    },
+    "click #logs" : () => {
+        FlowRouter.go("/");
+    },
+    "click #skupage" : () => {
+        FlowRouter.go("/database")
+    }
+});
+
+Template.mainLayout.helpers({
+    currentRouteIs: (route) => {
+        return (Session.equals('currentContext', route));
+    }
+});
+
 Template.home.helpers({
     imageTimestamps: () => {
         return ImageTimestamps.find().fetch();
+    }
+});
+
+Template.uploadcsv.onCreated( () => {
+    Template.instance().uploading = new ReactiveVar( false );
+    Meteor.subscribe("skudata.all");
+});
+
+Template.uploadcsv.helpers({
+    uploading() {
+        return Template.instance().uploading.get();
+    }
+});
+
+Template.uploadcsv.events({
+    'change [name="getcsvfile"]' ( event, template ) {
+        template.uploading.set( true );
+
+        Papa.parse( event.target.files[0], {
+            header: true,
+            complete( results, file ) {
+                console.log(results);
+                Meteor.call( 'parseUpload', results.data, ( error, response ) => {
+                    if ( error ) {
+                        console.log( error.reason );
+                    } else {
+                        template.uploading.set( false );
+                        Bert.alert( 'Upload complete!', 'success', 'growl-top-right' );
+                    }
+                });
+            }
+        });
+    }
+});
+
+Template.skudatabase.onCreated( ()=> {
+    Meteor.subscribe("skudata.all");
+});
+
+Template.skudatabase.helpers({
+    skuData: () => {
+        return SKUData.find().fetch();
     }
 });

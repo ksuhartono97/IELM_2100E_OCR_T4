@@ -7,3 +7,15 @@ FlowRouter.route("/", {
         BlazeLayout.render("mainLayout", {mainContent: "home"})
     }
 });
+
+FlowRouter.route("/upload", {
+    action: () => {
+        BlazeLayout.render("mainLayout", {mainContent: "uploadcsv"})
+    }
+});
+
+FlowRouter.route("/database", {
+    action: () => {
+        BlazeLayout.render("mainLayout", {mainContent: "skudatabase"})
+    }
+});

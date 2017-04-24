@@ -8,5 +8,20 @@ Meteor.methods({
     },
     'wipeImageTimestamps' : () => {
         ImageTimestamps.remove({type:"timeStamp"})
+    },
+    'parseUpload' : (data) => {
+        for ( let i = 0; i < data.length; i++ ) {
+            let item   = data[ i ],
+                exists = SKUData.findOne( { SkuCode: item.SkuCode } );
+
+            if ( !exists ) {
+                SKUData.insert( item );
+            } else {
+                console.warn( 'Rejected. This item already exists.' );
+            }
+        }
+    },
+    'wipeParseData' : () => {
+        SKUData.remove({})
     }
 });

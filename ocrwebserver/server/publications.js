@@ -5,3 +5,8 @@
 Meteor.publish("imageTimestamps.all", ()=> {
     return ImageTimestamps.find();
 });
+
+Meteor.publish("skudata.all", () => {
+   return SKUData.find();
+});
+
