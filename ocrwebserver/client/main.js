@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import {Session} from 'meteor/session'
 // import {Papa} from 'meteor/harrison/papa-parse'
+import * as levenshtein from 'fast-levenshtein';
 
 import './main.html';
 
@@ -35,21 +36,21 @@ Template.mainLayout.onCreated(() => {
 });
 
 Template.mainLayout.onRendered(() => {
-    fbImages.on('child_added', function(snapshot) {
-        let image = new Image();
-        image.src = 'data:image/jpg;base64,' + snapshot.val().image;
-        // document.body.appendChild(image);
-        //Create an object to download
-        let downloadImg = image;
-        downloadImg.src.replace('image/jpg', 'image/octet-stream');
-        //Download the file
-        let link = document.createElement('a');
-        let filename = new Date();
-        link.download = filename.getTime();
-        link.href = downloadImg.src;
-        link.click();
-        Meteor.call('imageTimestamps.insert', filename.getTime());
-    });
+    // fbImages.on('child_added', function(snapshot) {
+    //     let image = new Image();
+    //     image.src = 'data:image/jpg;base64,' + snapshot.val().image;
+    //     // document.body.appendChild(image);
+    //     //Create an object to download
+    //     let downloadImg = image;
+    //     downloadImg.src.replace('image/jpg', 'image/octet-stream');
+    //     //Download the file
+    //     let link = document.createElement('a');
+    //     let filename = new Date();
+    //     link.download = filename.getTime();
+    //     link.href = downloadImg.src;
+    //     link.click();
+    //     Meteor.call('imageTimestamps.insert', filename.getTime());
+    // });
 });
 
 Template.mainLayout.events({
