@@ -99,6 +99,48 @@
 
 <template name="ocr">
     <div class ="sixteen column">
-        <h1 align = "center">OCR Processing</h1>
+        <h1 align = "center">OCR Result Processing</h1>
+    </div>
+    <div class = "sixteen column">
+        <p></p>
+    </div>
+    <div class = "sixteen column">
+        {{#unless uploading}}
+            <input type="file" name="getocrdata">
+        {{else}}
+            <p><i class="fa fa-spin fa-refresh"></i> Uploading files...</p>
+        {{/unless}}
+    </div>
+    <div class = "sixteen column">
+        <p></p>
+    </div>
+    <div class="sixteen column">
+        <div class="ui message">
+            <p>Received input: <strong>{{outputString}}</strong></p>
+        </div>
+    </div>
+    <div class="sixteen column">
+        <table class = "ui fixed table">
+            <thead>
+            <tr>
+                <th>SKU Code</th>
+                <th>Attribute Value 1</th>
+                <th>Attribute Value 2</th>
+                <th>Product Description</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each searchResult}}
+                <tr>
+                    <td>{{SkuCode}}</td>
+                    <td>{{UniqloAttrValue1}}</td>
+                    <td>{{UniqloAttrValue2}}</td>
+                    <td>{{product_description}}</td>
+                    <td>{{receive_qty}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
     </div>
 </template>
