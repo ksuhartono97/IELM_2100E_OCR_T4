@@ -5,25 +5,29 @@
 <template name="mainLayout">
     <!--<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic,900,900italic'-->
           <!--rel='stylesheet' type='text/css'>-->
-    <div class="ui container">
-        <div class = "ui grid">
-            <div class="one column row">
-                <div class="ui menu">
-                    <div class = "{{#if currentRouteIs "/"}}active {{/if}} item" id = "logs">Logs</div>
-                    <div class = "{{#if currentRouteIs "/upload"}}active {{/if}} item" id = "upload">Upload</div>
-                    <div class = "{{#if currentRouteIs "/database"}}active {{/if}}item" id = "skupage">Database</div>
-                </div>
-            </div>
-            <div class="one column row">
+    <div class="ui fixed inverted menu">
+        <div class ="ui container">
+            <div class = "{{#if currentRouteIs "/"}}active {{/if}} item" id = "logs">Logs</div>
+            <div class = "{{#if currentRouteIs "/upload"}}active {{/if}} item" id = "upload">Upload SKU</div>
+            <div class = "{{#if currentRouteIs "/ocr"}}active {{/if}}item" id = "skupage">Process OCR Result</div>
+        </div>
+    </div>
+    <div class = "ui grid container">
+        <div class="one column row">
+            <div class="column"></div>
+        </div>
+        <div class="one column row">
+            <div class="column">
                 {{>Template.dynamic template=mainContent}}
             </div>
-            <div class="one column row">
-                <footer class="footer">
-                    <div class="container" align="center">
-                        <p class="text-muted">2017 Kristian Suhartono for IELM 2100E</p>
-                    </div>
-                </footer>
-            </div>
+        </div>
+        <div class="one column row">
+            <div class="column"></div>
+        </div>
+    </div>
+    <div class="ui vertical footer segment">
+        <div class="ui container" align="center">
+            <p class="text-muted">2017 Kristian Suhartono for IELM 2100E</p>
         </div>
     </div>
 </template>
@@ -67,12 +71,6 @@
             <p><i class="fa fa-spin fa-refresh"></i> Uploading files...</p>
         {{/unless}}
     </div>
-</template>
-
-<template name="skudatabase">
-    <div class ="sixteen column">
-        <h1 align = "center">SKU Database</h1>
-    </div>
     <div class="sixteen column">
         <table class = "ui fixed table">
             <thead>
@@ -96,5 +94,11 @@
             {{/each}}
             </tbody>
         </table>
+    </div>
+</template>
+
+<template name="ocr">
+    <div class ="sixteen column">
+        <h1 align = "center">OCR Processing</h1>
     </div>
 </template>

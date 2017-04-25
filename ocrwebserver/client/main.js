@@ -61,7 +61,7 @@ Template.mainLayout.events({
         FlowRouter.go("/");
     },
     "click #skupage" : () => {
-        FlowRouter.go("/database")
+        FlowRouter.go("/ocr")
     }
 });
 
@@ -85,6 +85,9 @@ Template.uploadcsv.onCreated( () => {
 Template.uploadcsv.helpers({
     uploading() {
         return Template.instance().uploading.get();
+    },
+    skuData: () => {
+        return SKUData.find().fetch();
     }
 });
 
@@ -109,12 +112,6 @@ Template.uploadcsv.events({
     }
 });
 
-Template.skudatabase.onCreated( ()=> {
+Template.uploadcsv.onCreated( () => {
     Meteor.subscribe("skudata.all");
-});
-
-Template.skudatabase.helpers({
-    skuData: () => {
-        return SKUData.find().fetch();
-    }
 });

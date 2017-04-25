@@ -14,8 +14,8 @@ FlowRouter.route("/upload", {
     }
 });
 
-FlowRouter.route("/database", {
+FlowRouter.route("/ocr", {
     action: () => {
-        BlazeLayout.render("mainLayout", {mainContent: "skudatabase"})
+        BlazeLayout.render("mainLayout", {mainContent: "ocr"})
     }
 });

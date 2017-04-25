@@ -53,8 +53,6 @@
         <item url="file://$USER_HOME$/.meteor/packages/http/1.2.12/web.browser/httpcall_client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/logging/1.1.17/web.browser/logging_cordova.js" />
         <item url="file://$USER_HOME$/.meteor/packages/mongo-id/1.0.6/web.browser/id.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/js/bootstrap.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/css/bootstrap.css" />
         <item url="file://$USER_HOME$/.meteor/packages/ordered-dict/1.0.9/web.browser/ordered_dict.js" />
         <item url="file://$USER_HOME$/.meteor/packages/allow-deny/1.0.5/web.browser/allow-deny.js" />
         <item url="file://$USER_HOME$/.meteor/packages/allow-deny/1.0.5/web.browser/allow-deny-tests.js" />
@@ -210,8 +208,6 @@
       <root url="file://$USER_HOME$/.meteor/packages/http/1.2.12/web.browser/httpcall_client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/logging/1.1.17/web.browser/logging_cordova.js" />
       <root url="file://$USER_HOME$/.meteor/packages/mongo-id/1.0.6/web.browser/id.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/js/bootstrap.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/css/bootstrap.css" />
       <root url="file://$USER_HOME$/.meteor/packages/ordered-dict/1.0.9/web.browser/ordered_dict.js" />
       <root url="file://$USER_HOME$/.meteor/packages/allow-deny/1.0.5/web.browser/allow-deny.js" />
       <root url="file://$USER_HOME$/.meteor/packages/allow-deny/1.0.5/web.browser/allow-deny-tests.js" />
