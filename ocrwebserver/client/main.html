@@ -12,135 +12,161 @@
             <div class = "{{#if currentRouteIs "/ocr"}}active {{/if}}item" id = "skupage">Process OCR Result</div>
         </div>
     </div>
-    <div class = "ui grid container">
-        <div class="one column row">
-            <div class="column"></div>
-        </div>
-        <div class="one column row">
-            <div class="column">
-                {{>Template.dynamic template=mainContent}}
-            </div>
-        </div>
-        <div class="one column row">
-            <div class="column"></div>
-        </div>
-    </div>
+    <!--<div class = "ui container">-->
+        <!--<div class="one column row">-->
+            <!--<div class="column"></div>-->
+        <!--</div>-->
+        <!--<div class="one column row">-->
+    {{>Template.dynamic template=mainContent}}
+        <!--</div>-->
+        <!--<div class="one column row">-->
+            <!--<div class="column"></div>-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="ui vertical footer segment">
-        <div class="ui container" align="center">
-            <p class="text-muted">2017 Kristian Suhartono for IELM 2100E</p>
+        <div class="ui centered grid">
+            <div class="four column centered row">
+                <column><p class="text-muted">2017 Kristian Suhartono for IELM 2100E</p></column>
+            </div>
         </div>
     </div>
 </template>
 
 <template name="home">
-    <div class="homePage">
-        <div class = "sixteen column">
-            <h1 align = "center">OCR WebServer Log Manager</h1>
+    <div class="ui container grid">
+        <div class="row">
+            <p> </p>
         </div>
-
-        <div class="sixteen column">
-            <table class="ui fixed table">
-                <thead>
-                <tr>
-                    <th>Image Name</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each imageTimestamps}}
+        <div class = "row">
+            <div class="eight column">
+                <h1 class="ui header">OCR WebServer Log Manager</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen column">
+                <table class="ui fixed table">
+                    <thead>
                     <tr>
-                        <td>{{timestamp}}.jpg</td>
-                        <td>Downloaded</td>
+                        <th>Image Name</th>
+                        <th>Status</th>
                     </tr>
-                {{/each}}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {{#each imageTimestamps}}
+                        <tr>
+                            <td>{{timestamp}}.jpg</td>
+                            <td>Downloaded</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
         </div>
-
     </div>
 </template>
 
 <template name="uploadcsv">
-    <div class = "sixteen column">
-        <h1 align = "center">Upload Files</h1>
-    </div>
-    <div class = "sixteen column">
-        {{#unless uploading}}
-            <input type="file" name="getcsvfile">
-        {{else}}
-            <p><i class="fa fa-spin fa-refresh"></i> Uploading files...</p>
-        {{/unless}}
-    </div>
-    <div class="sixteen column">
-        <table class = "ui fixed table">
-            <thead>
-            <tr>
-                <th>SKU Code</th>
-                <th>Attribute Value 1</th>
-                <th>Attribute Value 2</th>
-                <th>Product Description</th>
-                <th>Quantity</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each skuData}}
-                <tr>
-                    <td>{{SkuCode}}</td>
-                    <td>{{UniqloAttrValue1}}</td>
-                    <td>{{UniqloAttrValue2}}</td>
-                    <td>{{product_description}}</td>
-                    <td>{{receive_qty}}</td>
-                </tr>
-            {{/each}}
-            </tbody>
-        </table>
+    <div class="ui grid container">
+        <div class="row">
+            <p> </p>
+        </div>
+        <div class="row">
+            <div class = "eight column">
+                <h1 class="ui header">Upload Files</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class ="left floated twelve column">
+                {{#unless uploading}}
+                    <input type="file" name="getcsvfile">
+                {{else}}
+                    <p><i class="fa fa-spin fa-refresh"></i> Uploading files...</p>
+                {{/unless}}
+            </div>
+            <div class="right floated four column">
+                <button id = "emptyDatabase" class="ui secondary button">Empty Database</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen column">
+                <table class = "ui fixed table">
+                    <thead>
+                    <tr>
+                        <th>SKU Code</th>
+                        <th>Attribute Value 1</th>
+                        <th>Attribute Value 2</th>
+                        <th>Product Description</th>
+                        <th>Quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each skuData}}
+                        <tr>
+                            <td>{{SkuCode}}</td>
+                            <td>{{UniqloAttrValue1}}</td>
+                            <td>{{UniqloAttrValue2}}</td>
+                            <td>{{product_description}}</td>
+                            <td>{{receive_qty}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </template>
 
 <template name="ocr">
-    <div class ="sixteen column">
-        <h1 align = "center">OCR Result Processing</h1>
-    </div>
-    <div class = "sixteen column">
-        <p></p>
-    </div>
-    <div class = "sixteen column">
-        {{#unless uploading}}
-            <input type="file" name="getocrdata">
-        {{else}}
-            <p><i class="fa fa-spin fa-refresh"></i> Uploading files...</p>
-        {{/unless}}
-    </div>
-    <div class = "sixteen column">
-        <p></p>
-    </div>
-    <div class="sixteen column">
-        <div class="ui message">
-            <p>Received input: <strong>{{outputString}}</strong></p>
+    <div class="ui container grid">
+        <div class="row">
+            <p> </p>
         </div>
-    </div>
-    <div class="sixteen column">
-        <table class = "ui fixed table">
-            <thead>
-            <tr>
-                <th>SKU Code</th>
-                <th>Attribute Value 1</th>
-                <th>Attribute Value 2</th>
-                <th>Product Description</th>
-                <th>Quantity</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each searchResult}}
-                <tr>
-                    <td>{{SkuCode}}</td>
-                    <td>{{UniqloAttrValue1}}</td>
-                    <td>{{UniqloAttrValue2}}</td>
-                    <td>{{product_description}}</td>
-                    <td>{{receive_qty}}</td>
-                </tr>
-            {{/each}}
-            </tbody>
-        </table>
+        <div class="row">
+            <div class ="sixteen column">
+                <h1>OCR Result Processing</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen column">
+                {{#unless uploading}}
+                    <input type="file" name="getocrdata">
+                {{else}}
+                    <p><i class="fa fa-spin fa-refresh"></i> Uploading files...</p>
+                {{/unless}}
+            </div>
+        </div>
+        <div class="two column centered row">
+            <div class="column">
+                <div class="ui message">
+                    <p>Received input: <strong>{{outputString}}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen column">
+                <table class = "ui fixed table">
+                    <thead>
+                    <tr>
+                        <th>SKU Code</th>
+                        <th>Attribute Value 1</th>
+                        <th>Attribute Value 2</th>
+                        <th>Product Description</th>
+                        <th>Quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each searchResult}}
+                        <tr>
+                            <td>{{SkuCode}}</td>
+                            <td>{{UniqloAttrValue1}}</td>
+                            <td>{{UniqloAttrValue2}}</td>
+                            <td>{{product_description}}</td>
+                            <td>{{receive_qty}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </template>

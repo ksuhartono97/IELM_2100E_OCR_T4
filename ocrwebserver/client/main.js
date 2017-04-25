@@ -111,6 +111,9 @@ Template.uploadcsv.events({
                 });
             }
         });
+    },
+    'click #emptyDatabase' : () => {
+        Meteor.call('wipeParseData');
     }
 });
 
