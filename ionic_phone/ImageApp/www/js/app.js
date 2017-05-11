@@ -110,7 +110,7 @@ imageApp.controller("SecureController", function($scope, $ionicHistory, $firebas
       quality : 75,
       destinationType : Camera.DestinationType.DATA_URL,
       sourceType : Camera.PictureSourceType.CAMERA,
-      allowEdit : false,
+      allowEdit : true,
       encodingType: Camera.EncodingType.JPEG,
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: true

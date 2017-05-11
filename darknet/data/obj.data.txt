@@ -1,5 +1,0 @@
-classes= 1
-train  = data/obj/train.txt
-valid  = test.txt
-names = obj.names
-backup = backup/
