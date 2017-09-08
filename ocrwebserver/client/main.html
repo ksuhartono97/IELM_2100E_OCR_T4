@@ -5,28 +5,34 @@
 <template name="mainLayout">
     <!--<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic,900,900italic'-->
           <!--rel='stylesheet' type='text/css'>-->
-    <div class="ui fixed inverted menu">
-        <div class ="ui container">
-            <div class = "{{#if currentRouteIs "/"}}active {{/if}} item" id = "logs">Logs</div>
-            <div class = "{{#if currentRouteIs "/upload"}}active {{/if}} item" id = "upload">Upload SKU</div>
-            <div class = "{{#if currentRouteIs "/ocr"}}active {{/if}}item" id = "skupage">Process OCR Result</div>
+    <div class="main">
+        <div class="ui fixed inverted menu">
+            <div class ="ui container">
+                <div class = "{{#if currentRouteIs "/"}}active {{/if}} item" id = "logs">Logs</div>
+                <div class = "{{#if currentRouteIs "/upload"}}active {{/if}} item" id = "upload">Upload SKU</div>
+                <div class = "{{#if currentRouteIs "/ocr"}}active {{/if}}item" id = "skupage">Process OCR Result</div>
+            </div>
         </div>
+        <!--<div class = "ui container">-->
+        <!--<div class="one column row">-->
+        <!--<div class="column"></div>-->
+        <!--</div>-->
+        <!--<div class="one column row">-->
+        {{>Template.dynamic template=mainContent}}
+        <!--</div>-->
+        <!--<div class="one column row">-->
+        <!--<div class="column"></div>-->
+        <!--</div>-->
+        <!--</div>-->
     </div>
-    <!--<div class = "ui container">-->
-        <!--<div class="one column row">-->
-            <!--<div class="column"></div>-->
-        <!--</div>-->
-        <!--<div class="one column row">-->
-    {{>Template.dynamic template=mainContent}}
-        <!--</div>-->
-        <!--<div class="one column row">-->
-            <!--<div class="column"></div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <div class="ui vertical footer segment">
-        <div class="ui centered grid">
-            <div class="four column centered row">
-                <column><p class="text-muted">2017 Kristian Suhartono for IELM 2100E</p></column>
+    <div class="fixbottomfooter">
+        <div class="ui container">
+            <div class="ui vertical footer segment">
+                <div class="ui centered grid">
+                    <div class="four column centered row">
+                        <column><p class="text-muted">2017 Kristian Suhartono for IELM 2100E</p></column>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -44,29 +50,31 @@
         </div>
         <div class="row">
             <div class="sixteen column">
-                <table class="ui fixed table">
-                    <thead>
-                    <tr>
-                        <th>Image Name</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{#each imageTimestamps}}
+                <div class="tablewrapperlog">
+                    <table class="ui fixed table">
+                        <thead>
                         <tr>
-                            <td>{{timestamp}}.jpg</td>
-                            <td>Downloaded</td>
+                            <th>Image Name</th>
+                            <th>Status</th>
                         </tr>
-                    {{/each}}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {{#each imageTimestamps}}
+                            <tr>
+                                <td>{{timestamp}}.jpg</td>
+                                <td>Downloaded</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <template name="uploadcsv">
-    <div class="ui grid container">
+    <div class="ui container grid">
         <div class="row">
             <p> </p>
         </div>
@@ -76,41 +84,43 @@
             </div>
         </div>
         <div class="row">
-            <div class ="left floated twelve column">
+            <div class ="left floated column">
                 {{#unless uploading}}
                     <input type="file" name="getcsvfile">
                 {{else}}
                     <p><i class="fa fa-spin fa-refresh"></i> Uploading files...</p>
                 {{/unless}}
             </div>
-            <div class="right floated four column">
+            <div class="right floated">
                 <button id = "emptyDatabase" class="ui secondary button">Empty Database</button>
             </div>
         </div>
         <div class="row">
-            <div class="sixteen column">
-                <table class = "ui celled fixed selectable table">
-                    <thead>
-                    <tr>
-                        <th>SKU Code</th>
-                        <th>Attribute Value 1</th>
-                        <th>Attribute Value 2</th>
-                        <th>Product Description</th>
-                        <!--<th>Quantity</th>-->
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{#each skuData}}
+            <div class="tablewrapperdb">
+                <div class="sixteen column">
+                    <table class = "ui celled fixed selectable table">
+                        <thead>
                         <tr>
-                            <td>{{SkuCode}}</td>
-                            <td>{{UniqloAttrValue1}}</td>
-                            <td>{{UniqloAttrValue2}}</td>
-                            <td>{{product_description}}</td>
-                            <!--<td>{{receive_qty}}</td>-->
+                            <th>SKU Code</th>
+                            <th>Attribute Value 1</th>
+                            <th>Attribute Value 2</th>
+                            <th>Product Description</th>
+                            <!--<th>Quantity</th>-->
                         </tr>
-                    {{/each}}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {{#each skuData}}
+                            <tr>
+                                <td>{{SkuCode}}</td>
+                                <td>{{UniqloAttrValue1}}</td>
+                                <td>{{UniqloAttrValue2}}</td>
+                                <td>{{product_description}}</td>
+                                <!--<td>{{receive_qty}}</td>-->
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/ionic_phone/ImageApp/www" />
       <excludeFolder url="file://$MODULE_DIR$/ocrwebserver/.meteor/local" />
       <excludeFolder url="file://$MODULE_DIR$/ocrwebserver/.meteor/platforms" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
