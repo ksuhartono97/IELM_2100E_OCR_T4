@@ -1,4 +1,9 @@
 {
   "name": "ImageApp",
-  "app_id": "ielmOCRT4"
+  "app_id": "ielmOCRT4",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic1",
+  "watchPatterns": []
 }

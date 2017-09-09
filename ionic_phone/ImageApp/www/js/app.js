@@ -83,11 +83,9 @@ imageApp.controller("FirebaseController", function($scope, $state, $firebaseAuth
     });
   };
 
-
-
 });
 
-imageApp.controller("SecureController", function($scope, $ionicHistory, $firebaseArray, $cordovaCamera) {
+imageApp.controller("SecureController", function($scope, $state, $ionicHistory, $firebaseArray, $cordovaCamera) {
 
   $ionicHistory.clearHistory();
 
@@ -124,4 +122,16 @@ imageApp.controller("SecureController", function($scope, $ionicHistory, $firebas
     });
   }
 
+  $scope.logout = function() {
+    firebase.auth().signOut().then(function(result) {
+      alert("Logged out");
+      $state.go("firebase")
+    }).catch(function(error) {
+      // Handle Errors here.
+      alert("Log out failed");
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.error("ERROR: " + errorCode + " | Message: " + errorMessage);
+    })
+  }
 });
