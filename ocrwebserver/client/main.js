@@ -3,6 +3,9 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import {Session} from 'meteor/session'
 // import {Papa} from 'meteor/harrison/papa-parse'
 import * as levenshtein from 'fast-levenshtein';
+import { Meteor } from 'meteor-desktop';
+// import { Desktop } from '../.desktop/desktop.js';
+// import { Desktop } from 'meteor-desktop'
 
 import './main.html';
 
@@ -24,6 +27,7 @@ var fbImages = fbDatabase.child('images');
 var currentContext = new ReactiveVar();
 var outputStrings = new ReactiveVar();
 var searchResult = new ReactiveVar();
+// var desktop = new Desktop();
 
 Tracker.autorun(function() {
     FlowRouter.watchPathChange();
@@ -38,6 +42,7 @@ Template.mainLayout.onCreated(() => {
 });
 
 Template.mainLayout.onRendered(() => {
+    // console.log(desktop);
     fbImages.on('child_added', function(snapshot) {
         let image = new Image();
         image.src = 'data:image/jpg;base64,' + snapshot.val().image;

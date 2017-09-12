@@ -1,7 +1,7 @@
 {
-    "name": "My Meteor App",
+    "name": "Kerry OCR Application",
     "version": "0.0.1",
-    "projectName": "MyMeteorApp",
+    "projectName": "KerryOCRApplication",
     "devTools": true,
     "devtron": true,
     "desktopHCP": true,
@@ -11,7 +11,7 @@
     "autoUpdateCheckOnStart": true,
     "rebuildNativeNodeModules": false,
     "webAppStartupTimeout": 60000,
-    "exposeLocalFilesystem": false,
+    "exposeLocalFilesystem": true,
     "window": {
         "icon": "@assets/meteor.png",
         "_windows": {
@@ -33,13 +33,13 @@
     },
     "dependencies": {},
     "packageJsonFields": {
-        "description": "My Meteor App",
+        "description": "Kerry OCR Application",
         "author": "Me, Myself And I",
         "private": true
     },
     "builderOptions": {
         "win": {
-            "title": "My Meteor App",
+            "title": "Kerry OCR Application",
             "authors": "Me, Myself And I",
             "target": "squirrel"
         },
@@ -74,13 +74,13 @@
         },
         "version-string": {
             "CompanyName": "My Company",
-            "LegalCopyright": "Copyright 2016 My Company - All rights reserved.",
-            "FileDescription": "MyMeteorApp",
-            "OriginalFilename": "MyMeteorApp.exe",
+            "LegalCopyright": "Copyright 2017 My Company - All rights reserved.",
+            "FileDescription": "KerryOCRApplication",
+            "OriginalFilename": "KerryOCR.exe",
             "FileVersion": "@version",
             "ProductVersion": "@version",
-            "ProductName": "MyMeteorApp",
-            "InternalName": "MyMeteorApp.exe"
+            "ProductName": "KerryOCR",
+            "InternalName": "KerryOCR.exe"
         }
     }
 }
